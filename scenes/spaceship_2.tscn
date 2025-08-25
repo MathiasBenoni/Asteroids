@@ -1,0 +1,112 @@
+[gd_scene load_steps=13 format=3 uid="uid://bh8w027d7ee6l"]
+
+[ext_resource type="Script" uid="uid://8d8o50ij371v" path="res://scripts/spaceship_2.gd" id="1_q61ab"]
+[ext_resource type="PackedScene" uid="uid://bsxlngd3l6tc4" path="res://scenes/bullet.tscn" id="2_sk2fl"]
+[ext_resource type="Texture2D" uid="uid://qncyo1oiyf0n" path="res://Spirtes/Ship/ship_idle.png" id="6_o6o36"]
+[ext_resource type="Texture2D" uid="uid://ckop03w18y62h" path="res://Spirtes/Ship/ship_nothing.png" id="7_equbo"]
+[ext_resource type="Texture2D" uid="uid://b5ak7cvxusis6" path="res://Spirtes/Ship/ship_middle.png" id="8_wteo4"]
+[ext_resource type="Texture2D" uid="uid://eieep21hv1hy" path="res://Spirtes/Ship/ship_active.png" id="9_ygsyx"]
+[ext_resource type="Script" uid="uid://coqfaefah13em" path="res://scripts/animated_sprite_2d_2.gd" id="10_1m2d1"]
+[ext_resource type="AudioStream" uid="uid://bsmqglo10x5g8" path="res://sounds/rocket.mp3" id="11_v8a7g"]
+[ext_resource type="AudioStream" uid="uid://pmr84vhw2tt3" path="res://sounds/Gun_1.mp3" id="12_502av"]
+[ext_resource type="AudioStream" uid="uid://dyhjrekxw5cg7" path="res://sounds/losing_life.wav" id="13_wqa2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1svmx"]
+size = Vector2(7.14286, 15.4286)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7xvxe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_o6o36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_equbo")
+}],
+"loop": true,
+"name": &"i_frames",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_wteo4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_equbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ygsyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_equbo")
+}],
+"loop": true,
+"name": &"i_frames_forward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_o6o36")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_wteo4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ygsyx")
+}],
+"loop": true,
+"name": &"ship",
+"speed": 5.0
+}]
+
+[node name="Spaceship_2" type="CharacterBody2D"]
+z_index = 2
+scale = Vector2(7, 7)
+collision_layer = 240
+collision_mask = 240
+script = ExtResource("1_q61ab")
+bullet_scene = ExtResource("2_sk2fl")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+z_index = 4096
+position = Vector2(1.49012e-08, -1.85714)
+shape = SubResource("RectangleShape2D_1svmx")
+one_way_collision_margin = 0.0
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+z_index = 2
+position = Vector2(0, -0.714286)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_7xvxe")
+animation = &"ship"
+script = ExtResource("10_1m2d1")
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(196.429, 109.857)
+
+[node name="sound" type="Node" parent="."]
+
+[node name="rocket" type="AudioStreamPlayer" parent="sound"]
+stream = ExtResource("11_v8a7g")
+volume_db = -20.0
+parameters/looping = true
+
+[node name="Shoot" type="AudioStreamPlayer" parent="sound"]
+stream = ExtResource("12_502av")
+volume_db = -15.0
+
+[node name="Die" type="AudioStreamPlayer" parent="sound"]
+stream = ExtResource("13_wqa2s")
+volume_db = -10.0
+
+[node name="no" type="AudioStreamPlayer" parent="sound"]
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

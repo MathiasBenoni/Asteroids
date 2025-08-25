@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6mf7bcx7tycf"]
+
+[ext_resource type="Script" uid="uid://bcitofutsseqa" path="res://scripts/astroid.gd" id="1_a20x3"]
+[ext_resource type="Texture2D" uid="uid://cte3pdq7s1epa" path="res://Spirtes/astroid/astroid_broken.png" id="2_1wc57"]
+[ext_resource type="Texture2D" uid="uid://cstwkbgkg06gd" path="res://Spirtes/astroid/astroid.png" id="3_jo4wt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_36ggp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1wc57")
+}],
+"loop": true,
+"name": &"broken",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jo4wt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q4qlp"]
+radius = 13.125
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iridl"]
+radius = 13.125
+
+[node name="astroid" type="StaticBody2D"]
+z_index = -2
+position = Vector2(-12, 13)
+scale = Vector2(8, 8)
+collision_layer = 255
+collision_mask = 255
+script = ExtResource("1_a20x3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2.625, -0.375)
+sprite_frames = SubResource("SpriteFrames_36ggp")
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
+position = Vector2(-20, 1.25)
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
+position = Vector2(22.875, -1.125)
+shape = SubResource("CapsuleShape2D_q4qlp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, -0.25)
+shape = SubResource("CapsuleShape2D_iridl")

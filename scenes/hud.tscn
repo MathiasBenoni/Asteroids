@@ -1,0 +1,250 @@
+[gd_scene load_steps=7 format=3 uid="uid://bafw2ma3734pg"]
+
+[ext_resource type="Script" uid="uid://bdxpxf78876vp" path="res://scripts/hud.gd" id="1_mfarr"]
+[ext_resource type="FontFile" uid="uid://cbc6buk1ix5iq" path="res://Spirtes/chopsic-font/Chopsic-K6Dp.ttf" id="2_7rqk3"]
+[ext_resource type="FontFile" uid="uid://b2qmhbg86nrw7" path="res://Spirtes/sterion-font/Sterion-BLLld.ttf" id="3_acenc"]
+[ext_resource type="AudioStream" uid="uid://do0bfmmhhk6oo" path="res://sounds/levelUP.mp3" id="4_i436w"]
+[ext_resource type="AudioStream" uid="uid://blyall3ow455l" path="res://sounds/game_over.wav" id="5_o4ear"]
+[ext_resource type="AudioStream" uid="uid://dsbbaplycaj57" path="res://sounds/Click_5.mp3" id="6_axdau"]
+
+[node name="HUD" type="ParallaxBackground"]
+layer = -1
+script = ExtResource("1_mfarr")
+metadata/_edit_group_ = true
+
+[node name="bakgrunn" type="ColorRect" parent="."]
+z_index = -2
+offset_right = 160.0
+offset_bottom = 136.0
+color = Color(0, 0, 0, 1)
+
+[node name="score" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 100
+text = "Score: 0"
+
+[node name="level" type="Label" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.939
+anchor_right = 0.939
+offset_left = -328.171
+offset_right = -24.1711
+offset_bottom = 137.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 100
+text = "Level: 0"
+
+[node name="lives" type="Label" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.026
+anchor_right = 0.026
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 270.0
+offset_bottom = 140.0
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 100
+text = "Lives: 3"
+
+[node name="game_over" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -11.5
+offset_right = 48.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 200
+text = "GAME OVER!"
+
+[node name="game_over_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="start" type="Button" parent="."]
+z_index = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.832
+anchor_right = 0.5
+anchor_bottom = 0.933
+offset_left = -153.0
+offset_top = 6.0
+offset_right = 153.0
+offset_bottom = -0.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_acenc")
+theme_override_font_sizes/font_size = 100
+text = "START"
+
+[node name="ASTEROIDS" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -689.0
+offset_top = 88.0
+offset_right = 678.0
+offset_bottom = 361.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 200
+text = "ASTEROIDS"
+
+[node name="LEVEL" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -361.5
+offset_top = -136.5
+offset_right = 361.5
+offset_bottom = 136.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 200
+text = "Level: 1"
+
+[node name="level_timer" type="Timer" parent="."]
+
+[node name="SCORE" type="Label" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.699
+anchor_right = 0.5
+anchor_bottom = 0.699
+offset_left = -427.0
+offset_top = -136.5
+offset_right = 428.0
+offset_bottom = 136.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 200
+text = "SCORE: 0"
+
+[node name="levelup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_i436w")
+
+[node name="gameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_o4ear")
+volume_db = -2.0
+
+[node name="hiscore" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.3812
+anchor_top = 0.218
+anchor_right = 0.6168
+anchor_bottom = 0.267333
+offset_left = 6.10352e-05
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 70
+text = "Highscore: 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_axdau")
+
+[node name="tutorial" type="Node" parent="."]
+
+[node name="tutorial_trigger" type="Button" parent="tutorial"]
+anchors_preset = -1
+anchor_left = 0.3804
+anchor_top = 0.734
+anchor_right = 0.622
+anchor_bottom = 0.809333
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 100
+text = "Tutorial"
+metadata/_edit_use_anchors_ = true
+
+[node name="w" type="Label" parent="tutorial"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.3808
+anchor_top = 0.403333
+anchor_right = 0.6192
+anchor_bottom = 0.438667
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 50
+text = "W = move forward"
+metadata/_edit_use_anchors_ = true
+
+[node name="ad" type="Label" parent="tutorial"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.3788
+anchor_top = 0.568
+anchor_right = 0.6192
+anchor_bottom = 0.603333
+offset_bottom = -6.10352e-05
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 50
+text = "A / D = left / right"
+metadata/_edit_use_anchors_ = true
+
+[node name="space" type="Label" parent="tutorial"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.0
+offset_top = 241.0
+offset_right = 251.0
+offset_bottom = 294.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 50
+text = "Space to shoot"
+
+[node name="arrows" type="Label" parent="tutorial"]
+visible = false
+offset_left = 716.0
+offset_top = 849.0
+offset_right = 1818.0
+offset_bottom = 902.0
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 50
+text = "You can also use the arrowkeys"
+
+[node name="shoot" type="Label" parent="tutorial"]
+visible = false
+offset_left = 857.0
+offset_top = 915.0
+offset_right = 1658.0
+offset_bottom = 968.0
+theme_override_fonts/font = ExtResource("2_7rqk3")
+theme_override_font_sizes/font_size = 50
+text = "Now shoot the asteroid"
+
+[connection signal="timeout" from="game_over_timer" to="." method="_on_game_over_timer_timeout"]
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="timeout" from="level_timer" to="." method="_on_level_timer_timeout"]
+[connection signal="pressed" from="tutorial/tutorial_trigger" to="." method="_on_tutorial_trigger_pressed"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2frdd2itru5r"]
+
+[ext_resource type="Script" uid="uid://7d6swyeixvcm" path="res://scripts/main.gd" id="1_sjydw"]
+[ext_resource type="PackedScene" uid="uid://bh8w027d7ee6l" path="res://scenes/spaceship_2.tscn" id="2_wb341"]
+[ext_resource type="PackedScene" uid="uid://bsxlngd3l6tc4" path="res://scenes/bullet.tscn" id="3_mjfuj"]
+[ext_resource type="PackedScene" uid="uid://bafw2ma3734pg" path="res://scenes/hud.tscn" id="4_pkry0"]
+[ext_resource type="AudioStream" uid="uid://0wx7mekicwkt" path="res://sounds/Final_mass_produce.mp3" id="5_5rvhg"]
+[ext_resource type="AudioStream" uid="uid://dvrfekkpsdajo" path="res://sounds/Rock.mp3" id="6_q5r86"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_sjydw")
+spaceship_scene = ExtResource("2_wb341")
+bullet = ExtResource("3_mjfuj")
+
+[node name="Spaceship_2" parent="." instance=ExtResource("2_wb341")]
+visibility_layer = 1023
+
+[node name="HUD" parent="." instance=ExtResource("4_pkry0")]
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5rvhg")
+volume_db = -18.38
+autoplay = true
+parameters/looping = true
+
+[node name="rock" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_q5r86")
+volume_db = -15.0
+
+[node name="asteroids" type="Node" parent="."]
+
+[connection signal="hit" from="Spaceship_2" to="." method="_on_spaceship_2_hit"]
+[connection signal="gameover" from="HUD" to="." method="_on_hud_gameover"]
+[connection signal="gameover" from="HUD" to="Spaceship_2" method="_on_hud_gameover"]
+[connection signal="ship_ready" from="HUD" to="Spaceship_2" method="_on_hud_ship_ready"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+[connection signal="tutorial_button" from="HUD" to="." method="_on_hud_tutorial_button"]
